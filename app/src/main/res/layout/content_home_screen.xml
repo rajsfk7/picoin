@@ -53,16 +53,16 @@
                     ></LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/txtBalance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_alignEnd="@+id/txtUsername"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignRight="@+id/txtUsername"
+                    android:gravity="end"
                     android:text="0"
                     android:textAlignment="textEnd"
-                    android:textSize="60sp"
-                    android:gravity="end" />
+                    android:textSize="60sp" />
 
                 <TextView
                     android:id="@+id/txtUsername"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@+id/textView3"
+                    android:layout_below="@+id/txtBalance"
                     android:fontFamily="sans-serif-condensed"
                     android:layout_marginRight="10dp"
                     android:text="Username"

@@ -50,7 +50,7 @@ public class HomeScreen extends AppCompatActivity {
         imgBtnSettings = (ImageButton) findViewById(R.id.settings);
         imgBtnHistory = (ImageButton) findViewById(R.id.history);
         txtUsername = (TextView) findViewById(R.id.txtUsername);
-        txtBalance = (TextView) findViewById(R.id.txtAmount);
+        txtBalance = (TextView) findViewById(R.id.txtBalance);
 
         if(strUsername == ""){
             Toast.makeText(this, "Invalid Wallet", Toast.LENGTH_LONG);
@@ -66,6 +66,8 @@ public class HomeScreen extends AppCompatActivity {
         addListenersOnButton();
 
         InitializeSQLCipher();
+
+
 
     }
 
@@ -111,7 +113,7 @@ public class HomeScreen extends AppCompatActivity {
         db=myDbHelper.open(strUsername);
 
         Cursor cursor=db.rawQuery("select * from user", null);
-
+        cursor.moveToFirst();
         strUsername = cursor.getString(cursor.getColumnIndex("username"));
         strDeviceCode = cursor.getString(cursor.getColumnIndex("deviceid"));
         int balanceAmount = 0;
@@ -120,7 +122,8 @@ public class HomeScreen extends AppCompatActivity {
         }
         catch (Exception e){
         }
-
+        txtBalance.setText(balanceAmount);
+        cursor.close();
         ((GlobalSettings) this.getApplication()).setBALANCE(balanceAmount);
 
     }
