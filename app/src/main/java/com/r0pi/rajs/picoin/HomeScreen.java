@@ -122,7 +122,7 @@ public class HomeScreen extends AppCompatActivity {
         }
         catch (Exception e){
         }
-        txtBalance.setText(balanceAmount);
+        txtBalance.setText(String.valueOf(balanceAmount));
         cursor.close();
         ((GlobalSettings) this.getApplication()).setBALANCE(balanceAmount);
 
