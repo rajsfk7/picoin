@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.r0pi.rajs.picoin.HomeScreen"
+    tools:showIn="@layout/activity_home_screen">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:id="@+id/UserHeader"
+            android:layout_width="368dp"
+            android:layout_height="108dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:scaleType="fitCenter"
+                    android:padding="20dp"
+                    app:srcCompat="@drawable/logo" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@+id/imageView2"
+                    android:layout_toRightOf="@+id/imageView2"
+                    android:orientation="vertical"
+                    android:id="@+id/linearLayout"
+                    ></LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="0"
+                    android:textAlignment="textEnd"
+                    android:textSize="60sp"
+                    android:gravity="end" />
+
+                <TextView
+                    android:id="@+id/txtUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/textView3"
+                    android:fontFamily="sans-serif-condensed"
+                    android:layout_marginRight="10dp"
+                    android:text="Username"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="368dp"
+            android:layout_height="379dp"
+            android:layout_alignEnd="@+id/linearLayout"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/linearLayout"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@id/UserHeader"
+            app:layout_constraintStart_toStartOf="@id/UserHeader"
+            tools:ignore="NotSibling"
+
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="2"
+                android:padding="20dp">
+
+                <ImageButton
+                    android:id="@+id/transaction"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/colorWhite"
+                    android:padding="20dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/transaction" />
+
+                <ImageButton
+                    android:id="@+id/qrcode"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:background="@color/colorWhite"
+                    android:padding="20dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/qrcode" />
+
+                <ImageButton
+                    android:id="@+id/settings"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:background="@color/colorWhite"
+                    android:padding="20dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/settings" />
+
+                <ImageButton
+                    android:id="@+id/history"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:background="@color/colorWhite"
+                    android:padding="20dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/history" />
+            </GridLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
