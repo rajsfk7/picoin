@@ -112,7 +112,7 @@ public class HomeScreen extends AppCompatActivity {
         DatabaseHelper myDbHelper = new DatabaseHelper(HomeScreen.this, strUsername);
         db=myDbHelper.open(strUsername);
 
-        Cursor cursor=db.rawQuery("select * from tbluser", null);
+        Cursor cursor=db.rawQuery("select username, deviceid, balance from tbluser", null);
         cursor.moveToFirst();
         strUsername = cursor.getString(cursor.getColumnIndex("username"));
         strDeviceCode = cursor.getString(cursor.getColumnIndex("deviceid"));

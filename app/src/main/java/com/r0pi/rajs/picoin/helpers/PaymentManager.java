@@ -29,7 +29,7 @@ public class PaymentManager {
         Cursor cursor=db.rawQuery("select balance from tbluser where deviceid = '" + this.deviceCode + "'", null);
 
         int balanceAmount = amount + Integer.parseInt(cursor.getString(cursor.getColumnIndex("balance")));
-
+        cursor.close();
         if(balanceAmount > 50){
             return false;
         }
@@ -37,7 +37,7 @@ public class PaymentManager {
             db.execSQL("insert into tblTxn( txnid, mydeviceid, otherdeviceid, amt, txttype, hashvalue, address ) values(?, ?, ?, ?, ?, ?, ?)",
                     new Object[]{0, deviceCode, otherDeviceID, amount, "RECEIVED", strHash, strAddress });
 
-            cursor = db.rawQuery("UPDATE tbluser SET balance = " + balanceAmount + " WHERE deviceid = '" + this.deviceCode + "'", null);
+             db.rawQuery("UPDATE tbluser SET balance = " + balanceAmount + " WHERE deviceid = '" + this.deviceCode + "'", null);
             return true;
         }
     }
@@ -46,6 +46,7 @@ public class PaymentManager {
         Cursor cursor=db.rawQuery("select balance from tbluser where deviceid = '" + this.deviceCode + "'", null);
 
         int balanceAmount = Integer.parseInt(cursor.getString(cursor.getColumnIndex("balance"))) - amount;
+        cursor.close();
 
         if(balanceAmount < 0){
             return false;
@@ -54,7 +55,7 @@ public class PaymentManager {
             db.execSQL("insert into tblTxn( txnid, mydeviceid, otherdeviceid, amt, txttype, hashvalue, address ) values(?, ?, ?, ?, ?, ?, ?)",
                     new Object[]{0, deviceCode, otherDeviceID, amount, "PAID", strHash, strAddress });
 
-            cursor = db.rawQuery("UPDATE tbluser SET balance = " + balanceAmount + " WHERE deviceid = '" + this.deviceCode + "'", null);
+            db.rawQuery("UPDATE tbluser SET balance = " + balanceAmount + " WHERE deviceid = '" + this.deviceCode + "'", null);
             return true;
         }
     }
@@ -63,7 +64,7 @@ public class PaymentManager {
         Cursor cursor = db.rawQuery("select balance from tbluser where deviceid = '" + this.deviceCode + "'", null);
 
         int balanceAmount = Integer.parseInt(cursor.getString(cursor.getColumnIndex("balance")));
-
+        cursor.close();
         return balanceAmount;
     }
 }

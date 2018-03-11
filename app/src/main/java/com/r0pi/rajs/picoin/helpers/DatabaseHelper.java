@@ -51,11 +51,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         this.DEVICECODE = deviceCode;
         this.password =  "pI8234" + this.DEVICECODE + "CoiN"; //password;
 
+        boolean boolIsDb = false;
         if (!checkDataBase()) {// if Database Not Exist
             copyDataBase();
+            boolIsDb=true;
         }
 
         myDataBase = getExistDataBaseFile();
+
+        if(boolIsDb == true){
+
+            onCreate(myDataBase);
+        }
+
 
         return myDataBase;
     }
