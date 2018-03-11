@@ -37,7 +37,8 @@ public class PaymentManager {
             db.execSQL("insert into tblTxn( txnid, mydeviceid, otherdeviceid, amt, txntype, txnhash, txnaddress ) values(?, ?, ?, ?, ?, ?, ?)",
                     new Object[]{0, deviceCode, otherDeviceID, amount, "RECEIVED", strHash, strAddress });
 
-             db.rawQuery("UPDATE tbluser SET balance = ? WHERE deviceid = ?", new Object[]{balanceAmount, this.deviceCode});
+             //db.rawQuery("UPDATE tbluser SET balance = ? WHERE deviceid = ?", new Object[]{balanceAmount, this.deviceCode});
+            db.execSQL("UPDATE tbluser SET balance = ?", new Object[]{balanceAmount});
             return true;
         }
     }
@@ -55,7 +56,8 @@ public class PaymentManager {
             db.execSQL("insert into tblTxn( txnid, mydeviceid, otherdeviceid, amt, txntype, txnhash, txnaddress ) values(?, ?, ?, ?, ?, ?, ?)",
                     new Object[]{0, deviceCode, otherDeviceID, amount, "PAID", strHash, strAddress });
 
-            db.rawQuery("UPDATE tbluser SET balance = ? WHERE deviceid = ?", new Object[]{balanceAmount, this.deviceCode});
+            //db.rawQuery("UPDATE tbluser SET balance = ? WHERE deviceid = ?", new Object[]{balanceAmount, this.deviceCode});
+            db.execSQL("UPDATE tbluser SET balance = ?", new Object[]{balanceAmount});
             return true;
         }
     }
