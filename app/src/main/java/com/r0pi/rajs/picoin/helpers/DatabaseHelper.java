@@ -134,10 +134,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table user(username, deviceid, balance)");
-        db.execSQL("insert into user( username, deviceid, balance) values(?, ?, ?)", new Object[]{"  + this.DEVICECODE + " , " + this.DEVICECODE + ", 25});
+        db.execSQL("create table tbluser(username, deviceid, balance)");
+        db.execSQL("insert into tbluser( username, deviceid, balance) values(?, ?, ?)", new Object[]{this.DEVICECODE, this.DEVICECODE, 25});
 
-        db.execSQL("create table transaction(transactionid, mydeviceid, otherdeviceid, amt, transactiontype)");
+        db.execSQL("create table tbltxn(txnid, mydeviceid, otherdeviceid, amt, txntype, txnhash, txnaddress)");
     }
 
     @SuppressLint("LongLogTag")

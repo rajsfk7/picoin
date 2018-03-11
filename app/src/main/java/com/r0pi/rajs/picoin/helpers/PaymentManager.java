@@ -26,7 +26,7 @@ public class PaymentManager {
     }
 
     public boolean AddBalance( int amount, String otherDeviceID, String strHash, String strAddress){
-        Cursor cursor=db.rawQuery("select balance from user where deviceid = '" + this.deviceCode + "'", null);
+        Cursor cursor=db.rawQuery("select balance from tbluser where deviceid = '" + this.deviceCode + "'", null);
 
         int balanceAmount = amount + Integer.parseInt(cursor.getString(cursor.getColumnIndex("balance")));
 
@@ -34,16 +34,16 @@ public class PaymentManager {
             return false;
         }
         else{
-            db.execSQL("insert into transaction( transactionid, mydeviceid, otherdeviceid, amt, transactiontype, hashvalue, address ) values(?, ?, ?, ?, ?, ?, ?)",
+            db.execSQL("insert into tblTxn( txnid, mydeviceid, otherdeviceid, amt, txttype, hashvalue, address ) values(?, ?, ?, ?, ?, ?, ?)",
                     new Object[]{0, deviceCode, otherDeviceID, amount, "RECEIVED", strHash, strAddress });
 
-            cursor = db.rawQuery("UPDATE user SET balance = " + balanceAmount + " WHERE deviceid = '" + this.deviceCode + "'", null);
+            cursor = db.rawQuery("UPDATE tbluser SET balance = " + balanceAmount + " WHERE deviceid = '" + this.deviceCode + "'", null);
             return true;
         }
     }
 
     public boolean RemoveBalance(int amount, String otherDeviceID, String strHash, String strAddress){
-        Cursor cursor=db.rawQuery("select balance from user where deviceid = '" + this.deviceCode + "'", null);
+        Cursor cursor=db.rawQuery("select balance from tbluser where deviceid = '" + this.deviceCode + "'", null);
 
         int balanceAmount = Integer.parseInt(cursor.getString(cursor.getColumnIndex("balance"))) - amount;
 
@@ -51,16 +51,16 @@ public class PaymentManager {
             return false;
         }
         else{
-            db.execSQL("insert into transaction( transactionid, mydeviceid, otherdeviceid, amt, transactiontype, hashvalue, address ) values(?, ?, ?, ?, ?, ?, ?)",
+            db.execSQL("insert into tblTxn( txnid, mydeviceid, otherdeviceid, amt, txttype, hashvalue, address ) values(?, ?, ?, ?, ?, ?, ?)",
                     new Object[]{0, deviceCode, otherDeviceID, amount, "PAID", strHash, strAddress });
 
-            cursor = db.rawQuery("UPDATE user SET balance = " + balanceAmount + " WHERE deviceid = '" + this.deviceCode + "'", null);
+            cursor = db.rawQuery("UPDATE tbluser SET balance = " + balanceAmount + " WHERE deviceid = '" + this.deviceCode + "'", null);
             return true;
         }
     }
 
     public int getBalance( int balance){
-        Cursor cursor = db.rawQuery("select balance from user where deviceid = '" + this.deviceCode + "'", null);
+        Cursor cursor = db.rawQuery("select balance from tbluser where deviceid = '" + this.deviceCode + "'", null);
 
         int balanceAmount = Integer.parseInt(cursor.getString(cursor.getColumnIndex("balance")));
 
