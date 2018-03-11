@@ -86,9 +86,17 @@
         android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/btnRetry"
         app:layout_constraintTop_toBottomOf="@+id/txtUserCode"
         app:layout_constraintVertical_bias="0.553" />
+
+    <Button
+        android:id="@+id/btnSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sent"
+        tools:layout_editor_absoluteX="265dp"
+        tools:layout_editor_absoluteY="434dp" />
 
 </android.support.constraint.ConstraintLayout>

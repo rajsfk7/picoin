@@ -12,6 +12,7 @@ import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.mobapphome.mahencryptorlib.MAHEncryptor;
 import com.r0pi.rajs.picoin.helpers.GlobalSettings;
+import com.r0pi.rajs.picoin.helpers.PaymentManager;
 
 import org.json.JSONObject;
 
@@ -22,7 +23,10 @@ public class MyQRScreen extends AppCompatActivity {
 
     Button btnBack;
     Button btnHome;
+    Button btnSent;
+
     String strAmount;
+    PaymentManager payManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +37,11 @@ public class MyQRScreen extends AppCompatActivity {
 
         btnBack = (Button) findViewById(R.id.btnRetry);
         btnHome = (Button) findViewById(R.id.btnHome);
+        btnSent = (Button) findViewById(R.id.btnSent);
+
         addListenersOnButton();
 
+        payManager = new PaymentManager(MyQRScreen.this, (GlobalSettings) this.getApplication());
         try {
 
 
@@ -89,6 +96,38 @@ public class MyQRScreen extends AppCompatActivity {
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();
+            }
+        });
+
+        btnSent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent=new Intent(MyQRScreen.this, HomeScreen.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                if (payManager.RemoveBalance(Integer.parseInt(strAmount), "", "", "") == true)
+                {
+                    //TODO Disable Below Code
+                    intent.putExtra("STATUS", "SUCCESS");
+                    intent.putExtra("HEADER", "sent");
+                    intent.putExtra("MESSAGE", "you have successfully sent");
+                    intent.putExtra("FROMTO", "sent to");
+                    intent.putExtra("USERNAME", "");
+                    intent.putExtra("AMOUNT", strAmount );
+                }
+                else{
+                    intent.putExtra("STATUS", "FAIL");
+                    intent.putExtra("HEADER", "sent failed");
+                    intent.putExtra("MESSAGE", "You have balance of 0picoin, please earn some picoins");
+                    intent.putExtra("FROMTO", "You are out of balance");
+                    intent.putExtra("USERNAME", "");
+                    intent.putExtra("AMOUNT", strAmount );
+                }
+
+
+                startActivity(intent);
+                finish();
             }
         });
     }

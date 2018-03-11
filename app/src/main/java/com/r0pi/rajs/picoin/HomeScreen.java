@@ -34,6 +34,9 @@ public class HomeScreen extends AppCompatActivity {
     TextView txtUsername;
     TextView txtBalance;
 
+    SQLiteDatabase db;
+    DatabaseHelper myDbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,9 +111,14 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     private void InitializeSQLCipher(){
-        SQLiteDatabase db;
-        DatabaseHelper myDbHelper = new DatabaseHelper(HomeScreen.this, strUsername);
-        db=myDbHelper.open(strUsername);
+
+        try{
+            myDbHelper = new DatabaseHelper(HomeScreen.this, strUsername);
+            db=myDbHelper.open(strUsername);
+        }
+        catch (Exception e){
+            System.out.println("Error" + e.getMessage());
+        }
 
         Cursor cursor=db.rawQuery("select username, deviceid, balance from tbluser", null);
         cursor.moveToFirst();
